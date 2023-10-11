@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+//import 'package:google_fonts/google_fonts.dart';
+
+// ignore: must_be_immutable
+class MySidebar extends StatelessWidget {
+  MySidebar({Key? key}) : super(key: key);
+
+  var sidebarKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: sidebarKey,
+      body: Center(
+        child: MaterialButton(
+          onPressed: () {
+            sidebarKey.currentState!.openEndDrawer();
+          },
+          color: Color.fromARGB(255, 238, 144, 2),
+          child: Icon(Icons.menu),
+          padding: EdgeInsets.all(16),
+          textColor: Colors.white,
+          shape: CircleBorder(),
+        ),
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: const Text("バージョン情報"),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
