@@ -6,11 +6,12 @@ This is a collaborative Flutter application developed by multiple contributors. 
 
 ### Team All Types（五門斉）
 
-- 長沼 篤典: [GitHub Profile](https://github.com/developer1)
-- 堀越 涼太: [GitHub Profile](https://github.com/developer2)
-- チン テンニン: [GitHub Profile](https://github.com/HoshimiyaYoku)
-- セン シメイ: [GitHub Profile](https://github.com/DengGuan96)
-- 井田 舜悟: [GitHub Profile](https://github.com/developer3)
+- Atsunori Naganuma
+- Ryota Horikoshi
+- CHEN TIANREN: [GitHub Profile](https://github.com/HoshimiyaYoku)
+- QIAN SIMING: [GitHub Profile](https://github.com/DengGuan96)
+- 井田 舜悟
+
 
 ## How to Use
 
@@ -23,5 +24,5 @@ This is a collaborative Flutter application developed by multiple contributors. 
 ## Notes
 
 - Ensure the image has good quality for accurate recognition of numbers and units.
-- The application currently supports units such as (examples): `meters`, `feet`, `milliliters`, `gallons`, `centimeters`, `inches`, etc.
+- The application currently supports units such as (examples): `m`, `feet`, `ml`, `ガロン`, `cm`, `inch`, etc.
 - For more detailed information, please refer to the code documentation.
