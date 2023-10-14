@@ -21,8 +21,7 @@ This is a collaborative Flutter application developed by multiple contributors. 
 3. Once the image is selected, the application will automatically recognize numbers and units within the image.
 4. You can perform unit conversions between the recognized numbers and units.
 
-![GIF](https://cdn.statically.io/gh/HoshimiyaYoku/picx-images-hosting@master/20231014/sample.7kf882ymqj40.gif)
-
+![sample](https://github.com/HoshimiyaYoku/picx-images-hosting/raw/master/20231014/sample.7kf882ymqj40.gif)
 
 
 ## Notes
