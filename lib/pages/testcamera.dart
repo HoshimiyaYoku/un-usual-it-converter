@@ -230,14 +230,12 @@ class _TextConversionState extends State<TextConversion> {
         Text(
           widget.inputnumber + widget.inputunit,
           style: const TextStyle(
-            fontSize: 24,
-          ),
+              fontSize: 18, color: Color.fromARGB(255, 59, 59, 59)),
         ),
         Text(
           outputtext,
           style: const TextStyle(
-            fontSize: 24,
-          ),
+              fontSize: 24, color: Color.fromARGB(255, 0, 0, 0)),
         ),
         MaterialButton(
           onPressed: () {

@@ -167,7 +167,7 @@ class HomePage extends StatelessWidget {
           children: [
             ListTile(
               title: const Text("バージョン"),
-              subtitle: const Text("v0.51"),
+              subtitle: const Text("v1.00"),
               onTap: () {},
             ),
             ListTile(
