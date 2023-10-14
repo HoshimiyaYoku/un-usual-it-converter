@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:unitconverter/components/conversion.dart'; // 导入单位转换的相关代码
 import 'package:unitconverter/components/data.dart';
 import 'package:unitconverter/components/globals.dart';
-
+import 'package:flutter/services.dart';
 
 class ImageToTextTestImage extends StatefulWidget {
   const ImageToTextTestImage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _ImageToTextStateTest extends State<ImageToTextTestImage> {
   List<Offset> textPositions = [];
   Future<void> _pickImage() async {
     final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _pickedImage = File(pickedFile.path);
@@ -36,9 +36,9 @@ class _ImageToTextStateTest extends State<ImageToTextTestImage> {
   Future<void> _processImageForConversion(InputImage inputImage) async {
     try {
       final textRecognizer =
-      TextRecognizer(script: TextRecognitionScript.japanese);
+          TextRecognizer(script: TextRecognitionScript.japanese);
       final RecognizedText recognizedText =
-      await textRecognizer.processImage(inputImage);
+          await textRecognizer.processImage(inputImage);
       textList.clear();
       cornerPointsList.clear();
       for (TextBlock block in recognizedText.blocks) {
@@ -47,8 +47,10 @@ class _ImageToTextStateTest extends State<ImageToTextTestImage> {
           print(line.text);
           //print('座標');
           //print(line.cornerPoints);
-          double centerX = (line.cornerPoints[0].x + line.cornerPoints[2].x) / 2;
-          double centerY = (line.cornerPoints[0].y + line.cornerPoints[2].y) / 2;
+          double centerX =
+              (line.cornerPoints[0].x + line.cornerPoints[2].x) / 2;
+          double centerY =
+              (line.cornerPoints[0].y + line.cornerPoints[2].y) / 2;
           textPositions.add(Offset(centerX, centerY));
           textList.add(line.text);
           cornerPointsList.add(line.cornerPoints);
@@ -82,33 +84,32 @@ class _ImageToTextStateTest extends State<ImageToTextTestImage> {
   Widget build(BuildContext context) {
     List<String> numbersAndUnits = _extractNumbersAndUnits(outputText);
 
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("画像から変換"),
         backgroundColor: Color.fromARGB(255, 238, 144, 2),
-        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _pickImage,
         child: Icon(Icons.image),
         backgroundColor: Color.fromARGB(255, 8, 117, 90),
       ),
-      body: Column(
-        children: [
-          if (_pickedImage == null)
-            Container(
-              height: 300,
-              color: Color.fromARGB(255, 255, 240, 210),
-              width: double.infinity,
-            )
-          else
-            SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: Image.file(
-                _pickedImage!,
-                fit: BoxFit.fill,
-              ),
+      body: Column(children: [
+        if (_pickedImage == null)
+          Container(
+            height: 300,
+            color: Color.fromARGB(255, 255, 240, 210),
+            width: double.infinity,
+          )
+        else
+          SizedBox(
+            height: 300,
+            width: double.infinity,
+            child: Image.file(
+              _pickedImage!,
+              fit: BoxFit.fill,
             ),
+          ),
 /*          Column(
             children: numbersAndUnits.map((item) {
               return Text(
@@ -119,18 +120,18 @@ class _ImageToTextStateTest extends State<ImageToTextTestImage> {
           ),
           Expanded(child: Container()),
 */
-          Expanded(
-            child: ListView.builder(
+        Expanded(
+          child: ListView.builder(
             itemCount: numbersAndUnits.length ~/ 2,
             itemBuilder: (context, index) {
               String inputnumber = numbersAndUnits[index * 2];
               String inputunit = numbersAndUnits[index * 2 + 1];
-              return TextConversion(inputnumber: inputnumber, inputunit: inputunit);
+              return TextConversion(
+                  inputnumber: inputnumber, inputunit: inputunit);
             },
-            ),
-          )
-        ]
-      ),
+          ),
+        )
+      ]),
     );
   }
 }
@@ -146,7 +147,9 @@ class TextConversion extends StatefulWidget {
   final String inputnumber;
   final String inputunit;
 
-  const TextConversion({Key? key, required this.inputnumber, required this.inputunit}) : super(key: key);
+  const TextConversion(
+      {Key? key, required this.inputnumber, required this.inputunit})
+      : super(key: key);
 
   @override
   State<TextConversion> createState() => _TextConversionState();
@@ -156,7 +159,6 @@ class _TextConversionState extends State<TextConversion> {
   late Map<String, DoublePair>? itemsMap;
   late String outputunit;
   late String selectedItem;
-
 
   @override
   void initState() {
@@ -195,11 +197,16 @@ class _TextConversionState extends State<TextConversion> {
     selectedItem = itemsMap!.keys.first;
   }*/
 
-   @override
+  @override
   Widget build(BuildContext context) {
-    String outputtext = conversion(widget.inputnumber, widget.inputunit, outputunit);
+    String outputtext =
+        conversion(widget.inputnumber, widget.inputunit, outputunit);
 
     final List<String> items = itemsMap?.keys.toList() ?? [];
+
+    const clipboard = SnackBar(
+      content: Text("クリップボードにコピーしました"),
+    );
 
     return Column(
       children: [
@@ -231,6 +238,21 @@ class _TextConversionState extends State<TextConversion> {
           style: const TextStyle(
             fontSize: 24,
           ),
+        ),
+        MaterialButton(
+          onPressed: () {
+            Clipboard.setData(ClipboardData(text: outputtext));
+            ScaffoldMessenger.of(context).showSnackBar(clipboard);
+          },
+          elevation: 0,
+          color: Colors.white,
+          child: Icon(Icons.content_copy),
+          padding: EdgeInsets.all(16),
+          textColor: Colors.grey,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          //shape: CircleBorder(),
         ),
         Divider(),
       ],
