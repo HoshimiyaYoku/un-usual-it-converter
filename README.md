@@ -21,7 +21,7 @@ This is a collaborative Flutter application developed by multiple contributors. 
 3. Once the image is selected, the application will automatically recognize numbers and units within the image.
 4. You can perform unit conversions between the recognized numbers and units.
 
-![Sample](https://cdn.discordapp.com/attachments/1154292863157407756/1161587732846477332/Kapture_2023-10-11_at_17.52.21.gif?ex=6538d7e0&is=652662e0&hm=c61eb94f899dda0e25d3c84d4717283f21634b08c26094a8312265a428217eae&)
+![Sample](https://cdn.discordapp.com/attachments/1154292863157407756/1162727853012562021/Kapture_2023-10-14_at_21.24.03.gif?ex=653cfdb2&is=652a88b2&hm=f8c7c10ce8ff5e3b412af4c23823f35b04fdfe35ae85dccdb27ba59c6b6f75c2&)
 
 
 ## Notes
