@@ -107,7 +107,7 @@ class _ImageToTextStateTest extends State<ImageToTextTest> {
             width: double.infinity,
             child: Image.file(
               _pickedImage!,
-              fit: BoxFit.fill,
+              fit: BoxFit.contain,
             ),
           ),
 /*          Column(
